@@ -9,6 +9,8 @@ public class MainCameraMover : MonoBehaviour
 
     public Transform tempCamera;
 
+    public float camSpeed = .1f;
+
     public Material rgbSetColor;
     public Light rgbSetLight;
     public SO_Lighting lightSO;
@@ -34,9 +36,9 @@ public class MainCameraMover : MonoBehaviour
     {
         mainCamera = Camera.main.gameObject.transform;
         CloseEachCanvas();
-        rgbSetColor.SetColor("_EmissionColor", Color.cyan * 7);
-        rgbSetLight.color = Color.cyan;
-        lightSO.UsrColor = 0;
+        //rgbSetColor.SetColor("_EmissionColor", Color.cyan * 7);
+        //rgbSetLight.color = Color.cyan;
+        //lightSO.UsrColor = 0;
     }
 
     public void ZoomBackOut()

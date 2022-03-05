@@ -11,8 +11,9 @@ public class OptionsMenu : MonoBehaviour
 
     private void Start()
     {
-        rgbColor.SetColor("_EmissionColor", Color.cyan * 8);
-        rgbLight.color = Color.cyan;
+        //rgbColor.SetColor("_EmissionColor", Color.cyan * 7);
+        //rgbLight.color = Color.cyan;
+        ChangeLight(lightSO.UsrColor);
     }
 
     public void ChangeLight(int usrSelectedLight)
@@ -20,22 +21,22 @@ public class OptionsMenu : MonoBehaviour
         switch (usrSelectedLight)
         {
             case 1:
-                rgbColor.SetColor("_EmissionColor", Color.red * 8);
+                rgbColor.SetColor("_EmissionColor", Color.red * 7);
                 rgbLight.color = Color.red;
                 lightSO.UsrColor = 1;
                 break;
             case 2:
-                rgbColor.SetColor("_EmissionColor", Color.green * 8);
+                rgbColor.SetColor("_EmissionColor", Color.green * 7);
                 rgbLight.color = Color.green;
                 lightSO.UsrColor = 2;
                 break;
             case 3:
-                rgbColor.SetColor("_EmissionColor", Color.magenta * 8);
+                rgbColor.SetColor("_EmissionColor", Color.magenta * 7);
                 rgbLight.color = Color.magenta;
                 lightSO.UsrColor = 3;
                 break;
             case 4:
-                rgbColor.SetColor("_EmissionColor", Color.blue * 9);
+                rgbColor.SetColor("_EmissionColor", Color.blue * 8);
                 rgbLight.color = Color.blue;
                 lightSO.UsrColor = 4;
                 break;
