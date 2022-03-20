@@ -1,0 +1,12 @@
+LEVEL ONE::
+Player:
+- Fixed sensitivity of horizontal mouse movement
+- Fixed various dampening on player camera
+- Increased Player movement speed
+- Added Interactable ability to player
+- Added Sprint ability to player
+
+Lighting:
+- Updated global lighting effect to more intuitive standard
+
+Test Area:

@@ -6,11 +6,22 @@ public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
     private InputActionReference movementControl;
+    //Added to involve sprinting
+    [SerializeField]
+    private InputActionReference sprintControl;
     [SerializeField]
     private InputActionReference jumpControl;
+    //Added to involve interaction
+    [SerializeField]
+    private InputActionReference interactControl;
+    //Q button optionality
+    [SerializeField]
+    private InputActionReference escapeControl;
 
     [SerializeField]
     private float playerSpeed = 2.0f;
+    [SerializeField]
+    private float sprintSpeed = 3.0f;
     [SerializeField]
     private float jumpHeight = 1.0f;
     [SerializeField]
@@ -19,6 +30,10 @@ public class PlayerControls : MonoBehaviour
     private float rotationSpeed = 4f;
 
     private CharacterController controller;
+    
+    //Added for interaction manager
+    private PlayerInteraction _interactor;
+
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
@@ -27,19 +42,28 @@ public class PlayerControls : MonoBehaviour
     private void OnEnable()
     {
         movementControl.action.Enable();
+        sprintControl.action.Enable();
         jumpControl.action.Enable();
+        interactControl.action.Enable();
+        escapeControl.action.Enable();
     }
 
     private void OnDisable()
     {
         movementControl.action.Disable();
+        sprintControl.action.Disable();
         jumpControl.action.Disable();
+        interactControl.action.Disable();
+        escapeControl.action.Disable();
     }
 
     private void Start()
     {
+        //Locking the main camera...
+        Cursor.lockState = CursorLockMode.Locked;
         controller = gameObject.GetComponent<CharacterController>();
         cameraMainTransform = Camera.main.transform;
+        _interactor = gameObject.GetComponent<PlayerInteraction>();
     }
 
     void Update()
@@ -54,11 +78,34 @@ public class PlayerControls : MonoBehaviour
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
         move.y = 0f;
-        controller.Move(move * Time.deltaTime * playerSpeed);
 
+        //Added the sprint control action and put the following into a if / else (was just controller.move outside of if.
+        //Player Move / Sprint (TO DO:: Add to method)
+        if (sprintControl.action.IsPressed())
+        {
+            controller.Move(move * Time.deltaTime * (playerSpeed + sprintSpeed));
+        }
+        else
+        {
+            controller.Move(move * Time.deltaTime * playerSpeed);
+        }
+
+        //Jump Control (TO DO:: Add to method)
         if (jumpControl.action.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        //Interaction control (TO DO:: Add to method)
+        if (interactControl.action.triggered)
+        {
+            _interactor.Interact();
+        }
+
+        //Escape control
+        if (escapeControl.action.triggered)
+        {
+            _interactor.OptionsMenu();
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;

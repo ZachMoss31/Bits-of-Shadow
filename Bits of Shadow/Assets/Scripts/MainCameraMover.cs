@@ -31,6 +31,10 @@ public class MainCameraMover : MonoBehaviour
     public Button multiplayerButton;
     public Canvas multiplayerCanvas;
 
+    public Canvas patchNotesCanvas;
+    public Button patchNotesOpen;
+    public Button patchNotesClose;
+
 
     void Start()
     {
@@ -116,6 +120,21 @@ public class MainCameraMover : MonoBehaviour
         playCanvas.gameObject.SetActive(false);
         quitCanvas.gameObject.SetActive(false);
         multiplayerCanvas.gameObject.SetActive(false);
+        patchNotesCanvas.gameObject.SetActive(false);
+    }
+
+    public void OpenPatchNotes()
+    {
+        patchNotesCanvas.gameObject.SetActive(true);
+        patchNotesOpen.gameObject.SetActive(false);
+        patchNotesClose.gameObject.SetActive(true);
+    }
+
+    public void ClosePatchNotes()
+    {
+        patchNotesCanvas.gameObject.SetActive(false);
+        patchNotesOpen.gameObject.SetActive(true);
+        patchNotesClose.gameObject.SetActive(false);
     }
 
     public void QuitGame()
