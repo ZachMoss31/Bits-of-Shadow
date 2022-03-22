@@ -13,7 +13,9 @@ public class OptionsMenu : MonoBehaviour
     {
         //rgbColor.SetColor("_EmissionColor", Color.cyan * 7);
         //rgbLight.color = Color.cyan;
-        ChangeLight(lightSO.UsrColor);
+
+        //JUST commented this out 3/20/22 to try and fix recoloring issue
+        //ChangeLight(lightSO.UsrColor);
     }
 
     public void ChangeLight(int usrSelectedLight)

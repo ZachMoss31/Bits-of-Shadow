@@ -120,12 +120,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         for (int i = 0; i < testables.Count; i++)
         {
+            Vector3 distToPlayer = testables[i].transform.position - _player.transform.position;
             Vector3 cameraDirection = Camera.main.transform.forward;
             Vector3 targetItem = testables[i].transform.position - Camera.main.transform.position;
 
             var lookPercent = Vector3.Dot(cameraDirection.normalized, targetItem.normalized);
-
+            
             testables[i].lookPercent = lookPercent;
+            testables[i].distToObj = distToPlayer.magnitude - 1.1f;
         }
     }
 

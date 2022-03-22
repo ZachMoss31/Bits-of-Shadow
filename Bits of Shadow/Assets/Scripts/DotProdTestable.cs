@@ -11,6 +11,7 @@ public class DotProdTestable : MonoBehaviour
     bool _showDotProd;
 
     public float lookPercent;
+    public float distToObj;
 
     private void Awake()
     {
@@ -28,6 +29,6 @@ public class DotProdTestable : MonoBehaviour
     }
     void Update()
     {
-        _text.text = lookPercent.ToString("F3");
+        _text.text = "dotprod: " + lookPercent.ToString("F3") + "\ndist: " + distToObj.ToString("F1");
     }
 }
