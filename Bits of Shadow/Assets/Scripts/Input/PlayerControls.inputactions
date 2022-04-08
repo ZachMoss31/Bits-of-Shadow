@@ -2,34 +2,6 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Shadow",
-            "id": "aa0cec8e-7a69-42ff-b727-283171f4b32a",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "25a1490e-36ac-420f-b18e-99f45a7d832e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "c65cb922-86d3-4dac-ba2d-9b73ee40a745",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "3rdPerson",
             "id": "ec418896-c920-4e1c-a282-9dbb91393f9f",
             "actions": [

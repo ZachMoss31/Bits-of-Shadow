@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameManagement
   - Interactable
+  - PlayerBody
   layers:
   - Default
   - TransparentFX

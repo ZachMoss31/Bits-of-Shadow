@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class BitStreamBus : MonoBehaviour, IInteractable
 {
-    Material _material;
+    GameObject _player;
+    public GameObject char1;
+    public GameObject char2;
+
     public void Interact()
     {
         Debug.Log("Changed my color!");
-        _material.color = Color.white;
+        char1.gameObject.SetActive(false);
+        char2.gameObject.SetActive(true);
     }
 
     void Awake()
     {
-        _material = this.GetComponent<Material>();
+        _player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
