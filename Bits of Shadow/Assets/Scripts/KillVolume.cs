@@ -14,8 +14,11 @@ public class KillVolume : MonoBehaviour
         {
             deathParticles.transform.position = other.transform.position;
             deathParticles.Play();
-            other.gameObject.SetActive(false);
-            StartCoroutine(RespawnPlayer());
+            var curAnim = other.GetComponentInChildren<Animator>();
+            var _playerControl = other.GetComponentInChildren<PlayerControls>();
+            _playerControl.PlayerDeathAnimate();
+            //other.gameObject.SetActive(false);
+            StartCoroutine(RespawnPlayer(_playerControl));
         }
 
         else if (other.CompareTag("Interactable"))
@@ -24,12 +27,14 @@ public class KillVolume : MonoBehaviour
         }
     }
 
-    IEnumerator RespawnPlayer()
+    IEnumerator RespawnPlayer(PlayerControls _playerAnimator)
     {
         yield return new WaitForSecondsRealtime(3f);
+        _playerAnimator.StopPlayer();
         player.transform.position = respawnPoint.transform.position;
         player.transform.rotation = respawnPoint.transform.rotation;
-        player.gameObject.SetActive(true);
+        //player.gameObject.SetActive(true);
         deathParticles.Stop();
+        _playerAnimator.PlayerDeathRespawn();
     }
 }

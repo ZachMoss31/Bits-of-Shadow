@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     #region Private Member Variables
     List<GameObject> _nearbyObjects;
+    List<GameObject> _clickableObjects;
     CinemachineVirtualCamera _playerCamera;
     GameObject _player;
     SphereCollider _playerInteractSphere;
@@ -32,6 +33,7 @@ public class PlayerInteraction : MonoBehaviour
         _playerCamera = this.GetComponentInChildren<CinemachineVirtualCamera>();
         _playerInteractSphere = this.GetComponent<SphereCollider>();
         _nearbyObjects = new List<GameObject>();
+        _clickableObjects = new List<GameObject>();
         _playerDir = _playerCamera.transform.position - _player.transform.position;
         _playerDir.Normalize();
     }
@@ -68,6 +70,37 @@ public class PlayerInteraction : MonoBehaviour
                 interaction.Interact();
             }
         }
+
+        foreach (var obj in _clickableObjects)
+        {
+            //If the player is in look threshold logic, interaction can go here....
+            //Could swap out camera.main with _playerCamera and see how that does...
+            Vector3 camDir = Camera.main.transform.forward;
+            Vector3 targObj = obj.transform.position - Camera.main.transform.position;
+
+            var lookPercent = Vector3.Dot(camDir.normalized, targObj.normalized);
+            float threshold = 0.97f;
+
+            var interaction = obj.GetComponent<IClickable>();
+            if (interaction == null)
+                continue;
+
+            if (lookPercent > threshold)
+            {
+                interaction.ClickInteract();
+            }
+        }
+
+    }
+
+    public int GetInteractableAmount()
+    {
+        return _nearbyObjects.Count;
+    }
+
+    public int GetClickableAmount()
+    {
+        return _clickableObjects.Count;
     }
 
     public void OptionsMenu()
@@ -92,8 +125,16 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.GetComponent<IInteractable>() != null)
         {
-            _nearbyObjects.Add(other.gameObject);
-            Debug.Log("Added a gameobject of name " + other.name);
+            if(other.GetComponent<IClickable>() != null)
+            {
+                _clickableObjects.Add(other.gameObject);
+                Debug.Log("Added a clickable gameobject of name " + other.name);
+            }
+            else
+            {
+                _nearbyObjects.Add(other.gameObject);
+                Debug.Log("Added a gameobject of name " + other.name);
+            }
         }
         else
         {
@@ -105,8 +146,16 @@ public class PlayerInteraction : MonoBehaviour
     {
         if(other.GetComponent<IInteractable>() != null)
         {
-            _nearbyObjects.Remove(other.gameObject);
-            Debug.Log("Removed a gameobject of name " + other.name);
+            if(other.GetComponent <IClickable>() != null)
+            {
+                _clickableObjects.Remove(other.gameObject);
+                Debug.Log("Removed a clickable gameobject of name " + other.name);
+            }
+            else
+            {
+                _nearbyObjects.Remove(other.gameObject);
+                Debug.Log("Removed a gameobject of name " + other.name);
+            }
         }
     }
     #endregion
