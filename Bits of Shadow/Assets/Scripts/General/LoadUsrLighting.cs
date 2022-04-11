@@ -17,20 +17,20 @@ public class LoadUsrLighting : MonoBehaviour
         switch (lightNumber)
         {
             case 1:
-                curLight.color = Color.red;
+                curLight.color = Color.red * .5f;
                 break;
             case 2:
-                curLight.color = Color.green;
+                curLight.color = Color.green * .3f;
                 break;
             case 3:
-                curLight.color = Color.magenta;
+                curLight.color = Color.magenta * .3f;
                 break;
             case 4:
-                curLight.color = Color.blue;
+                curLight.color = Color.blue * .5f;
                 break;
             case 0:
             default:
-                curLight.color = Color.cyan;
+                curLight.color = Color.cyan * .5f;
                 break;
         }
     }

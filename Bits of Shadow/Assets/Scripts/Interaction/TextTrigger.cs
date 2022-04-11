@@ -25,7 +25,7 @@ public class TextTrigger : MonoBehaviour
         _promptText.text = textToDisplay;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {

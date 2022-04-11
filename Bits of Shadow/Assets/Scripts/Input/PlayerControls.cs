@@ -22,8 +22,9 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField]
     private float playerSpeed = 2.0f;
+    private float _tmpSpeed;
     [SerializeField]
-    private float sprintSpeed = 3.0f;
+    private float sprintSpeed = 4.0f;
     [SerializeField]
     private float jumpHeight = 1.0f;
     [SerializeField]
@@ -70,6 +71,7 @@ public class PlayerControls : MonoBehaviour
         cameraMainTransform = Camera.main.transform;
         _interactor = gameObject.GetComponent<PlayerInteraction>();
         _animator = GetComponentInChildren<Animator>();
+        _tmpSpeed = playerSpeed;
     }
 
     void Update()
@@ -104,7 +106,8 @@ public class PlayerControls : MonoBehaviour
         if (jumpControl.action.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            _animator.SetBool("isJumping", true);
+            //_animator.SetBool("isJumping", true);
+            _animator.Play("PlayerJump");
         }
 
         //Interaction control (TO DO:: Add to method)
@@ -151,27 +154,6 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    public void PlayerDeathAnimate()
-    {
-        SetAllAnimations();
-        gravityValue = 0f;
-        playerVelocity.y = 0f;
-        _animator.SetBool("isDead", true);
-    }
-
-    public void PlayerDeathRespawn()
-    {
-        Debug.Log("Made it to respawn");
-        _animator.enabled = false;
-        _animator.enabled = true;
-        SetAllAnimations();
-        gravityValue = -33f;
-        _animator.SetBool("isRespawning", true);
-        //_animator.SetBool("isIdle", true);
-        StartCoroutine(CutAnimation());
-        //_animator.SetBool("isRespawning", false);
-    }
-
     IEnumerator CutAnimation()
     {
         yield return new WaitForSecondsRealtime(.3f);
@@ -182,12 +164,13 @@ public class PlayerControls : MonoBehaviour
         _animator.SetBool("isInteracting", false);
     }
 
-    void SetAllAnimations()
+    public void SetAllAnimations()
     {
         _animator.SetBool("isWalking", false);
         _animator.SetBool("isSprinting", false);
         _animator.SetBool("isJumping", false);
         _animator.SetBool("isDead", false);
+        _animator.SetBool("isInteracting", false);
     }
 
     public void StopPlayer()
@@ -195,5 +178,11 @@ public class PlayerControls : MonoBehaviour
         playerSpeed = 0f;
         playerVelocity.y = 0f;
         gravityValue = 0f;
+    }
+
+    public void RestorePlayerValues()
+    {
+        playerSpeed = _tmpSpeed;
+        gravityValue = -33f;
     }
 }
