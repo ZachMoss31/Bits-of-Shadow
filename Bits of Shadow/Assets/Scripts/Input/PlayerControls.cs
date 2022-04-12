@@ -115,11 +115,9 @@ public class PlayerControls : MonoBehaviour
         {
             if(_interactor.GetInteractableAmount() > 0)
             {
-                _interactor.Interact();
-
-                // ----------------------------------------------------- TO DO:: add ability animations
-
-                //_animator.SetBool("isInteracting", true);
+                //_interactor.Interact();
+                _animator.Play("PlayerPhasePush");
+                StartCoroutine(DelayedInteract());
             }
             else if(_interactor.GetClickableAmount() > 0)
             {
@@ -152,6 +150,12 @@ public class PlayerControls : MonoBehaviour
         {
             _animator.SetBool("isWalking", false);
         }
+    }
+
+    IEnumerator DelayedInteract()
+    {
+        yield return new WaitForSeconds(.7f);
+        _interactor.Interact();
     }
 
     IEnumerator CutAnimation()

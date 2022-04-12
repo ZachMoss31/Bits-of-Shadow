@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sc_TutLevel.unity
     guid: e22e1d523719e704c973d7ec177b6430
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ShadowTest.unity
     guid: e864543136a62b1469bad41b9dc98494
   m_configObjects: {}
