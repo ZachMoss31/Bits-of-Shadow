@@ -626,11 +626,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template3D
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: ZachMoss
+  metroCertificateIssuer: ZachMoss
+  metroCertificateNotAfter: 8015853f6c77d901
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: Bits of Shadow

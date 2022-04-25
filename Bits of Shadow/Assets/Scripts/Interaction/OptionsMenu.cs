@@ -9,6 +9,9 @@ public class OptionsMenu : MonoBehaviour
     public Light rgbLight;
     public SO_Lighting lightSO;
 
+    public AudioSource mainAudio;
+    public AudioClip selection;
+
     private void Start()
     {
         //rgbColor.SetColor("_EmissionColor", Color.cyan * 7);
@@ -20,6 +23,10 @@ public class OptionsMenu : MonoBehaviour
 
     public void ChangeLight(int usrSelectedLight)
     {
+        mainAudio.clip = selection;
+        mainAudio.pitch = .6f;
+        mainAudio.Play();
+
         switch (usrSelectedLight)
         {
             case 1:
@@ -50,5 +57,4 @@ public class OptionsMenu : MonoBehaviour
                 break;
         }
     }
-
 }

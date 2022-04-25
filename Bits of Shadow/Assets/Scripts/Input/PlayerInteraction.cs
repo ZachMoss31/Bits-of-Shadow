@@ -21,6 +21,8 @@ public class PlayerInteraction : MonoBehaviour
     public Transform camera;
     public bool showDotProd;
     public Canvas optionsMenu;
+    public AudioSource mainAudio;
+    public AudioClip[] audioClips;
     #endregion
 
     //For Debug use...
@@ -111,12 +113,16 @@ public class PlayerInteraction : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             optionsMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
+            mainAudio.clip = audioClips[0];
+            mainAudio.Play();
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             optionsMenu.gameObject.SetActive(false);
             Time.timeScale = 1;
+            mainAudio.clip = audioClips[1];
+            mainAudio.Play();
         }
     }
 

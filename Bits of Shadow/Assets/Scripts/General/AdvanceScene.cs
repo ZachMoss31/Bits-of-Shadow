@@ -14,9 +14,11 @@ public class AdvanceScene : MonoBehaviour
 
     IEnumerator EndLevel()
     {
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(3f);
 
         //Fade stuff out...
-        Application.Quit();
+
+        Cursor.lockState = CursorLockMode.None;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Sc_MainMenu");
     }
 }

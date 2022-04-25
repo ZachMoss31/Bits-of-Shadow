@@ -9,6 +9,11 @@ public class MainCameraMover : MonoBehaviour
 
     public Transform tempCamera;
 
+    [Header("Audio Settings")]
+    public AudioSource mainAudio;
+    public AudioClip backClick;
+    public AudioClip forwardClick;
+
     public float camSpeed = .1f;
 
     public Material rgbSetColor;
@@ -51,6 +56,11 @@ public class MainCameraMover : MonoBehaviour
         mainCamera.transform.rotation = tempCamera.rotation;
         EnableMainButtons();
         CloseEachCanvas();
+
+        //Audio Methods
+        mainAudio.clip = backClick;
+        mainAudio.pitch = .5f;
+        mainAudio.Play();
     }
 
     public void OptionsZoomIn()
@@ -60,6 +70,11 @@ public class MainCameraMover : MonoBehaviour
         optionsCanvas.gameObject.SetActive(true);
 
         DisableMainButtons();
+
+        //Audio Methods
+        mainAudio.clip = forwardClick;
+        mainAudio.pitch = 1f;
+        mainAudio.Play();
     }
 
     public void OptionsBack()
@@ -67,8 +82,12 @@ public class MainCameraMover : MonoBehaviour
         mainCamera.transform.position = Vector3.Lerp(transform.position, tempCamera.position, 1f);
         mainCamera.transform.rotation = tempCamera.rotation;
         optionsCanvas.gameObject.SetActive(false);
-
         EnableMainButtons();
+
+        //Audio Methods
+        mainAudio.clip = backClick;
+        mainAudio.pitch = .5f;
+        mainAudio.Play();
     }
 
     public void PlayZoomIn()
@@ -78,6 +97,11 @@ public class MainCameraMover : MonoBehaviour
         playCanvas.gameObject.SetActive(true);
 
         DisableMainButtons();
+
+        //Audio Methods
+        mainAudio.clip = forwardClick;
+        mainAudio.pitch = 1f;
+        mainAudio.Play();
     }
 
     public void QuitZoomIn()
@@ -87,6 +111,11 @@ public class MainCameraMover : MonoBehaviour
         quitCanvas.gameObject.SetActive(true);
 
         DisableMainButtons();
+
+        //Audio Methods
+        mainAudio.clip = forwardClick;
+        mainAudio.pitch = 1f;
+        mainAudio.Play();
     }
 
     public void MultiplayerZoomIn()
@@ -96,6 +125,11 @@ public class MainCameraMover : MonoBehaviour
         multiplayerCanvas.gameObject.SetActive(true);
 
         DisableMainButtons();
+
+        //Audio Methods
+        mainAudio.clip = forwardClick;
+        mainAudio.pitch = 1f;
+        mainAudio.Play();
     }
 
     public void DisableMainButtons()

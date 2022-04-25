@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlatformHover : MonoBehaviour
 {
+    [Header("Modification Options")]
     public bool canHover;
-    public float hoverSpeed = 2f;
+    public bool stopAtEnd;
     public bool indexOverride = false;
     public int indexStartOverride = 0;
+    public float hoverSpeed = 2f;
+
+    [Header("Waypoints Array")]
     public GameObject platformWaypointsArray;
+
     Transform[] hoverTargets;
     Vector3 curTarget;
     int _targIndex = 0;

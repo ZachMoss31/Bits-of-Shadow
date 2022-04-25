@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
     public TextMeshProUGUI timer;
     public GameObject player;
-    public GameObject[] lives;
+    public RawImage[] lives;
     public Transform[] respawnPoints;
+    public Canvas objectiveComplete;
+    public Canvas gameOver;
+    public TextMeshProUGUI timerResult;
+    public AudioSource mainAudio;
+    public int keys;
+
+    [Header("Objective Forcefield")]
+    public GameObject dome;
 
     float _time = 0f;
     float _sec;
@@ -23,11 +32,13 @@ public class GameplayManager : MonoBehaviour
     /// Section Dealing with Respawning and Player Deaths
     /// </summary>
     [SerializeField]
-    int _playerLives = 3;
+    int playerLives = 3;
     [SerializeField]
     int _curSpawn;
     public ParticleSystem deathEffect;
     public CinemachineVirtualCamera mainCam;
+
+    FadeControl _fadeControl;
 
     void Awake()
     {
@@ -35,6 +46,8 @@ public class GameplayManager : MonoBehaviour
         _curSpawn = 0;
         timer.text = "Time: 00:00";
         _playerControls = player.GetComponent<PlayerControls>();
+        _fadeControl = FindObjectOfType<FadeControl>();
+        objectiveComplete.gameObject.SetActive(false);
     }
 
     void Update()
@@ -45,6 +58,7 @@ public class GameplayManager : MonoBehaviour
     public void KillPlayer(GameObject curPlayer)
     {
         Debug.Log("Player killed at " + curPlayer.transform.position.ToString());
+        DecrementLives();
 
         //Play effects at the location sent from Kill Volume
         deathEffect.transform.position = curPlayer.transform.position;
@@ -60,6 +74,9 @@ public class GameplayManager : MonoBehaviour
 
         //Call a coroutine here to wait and then move player etc
         StartCoroutine(RespawnPlayer());
+
+        //Fade in and Out for death of player...
+        _fadeControl.FadeOutAndBack();
     }
 
     IEnumerator RespawnPlayer()
@@ -86,6 +103,11 @@ public class GameplayManager : MonoBehaviour
         StartCoroutine(EnableControls(player.transform));
     }
 
+    public void UpdateSpawn(int spawnPoint)
+    {
+        _curSpawn = spawnPoint;
+    }
+
     IEnumerator EnableControls(Transform playerMovedPos)
     {
         yield return new WaitForFixedUpdate();
@@ -107,13 +129,46 @@ public class GameplayManager : MonoBehaviour
 
     public void DecrementLives()
     {
-        if(_playerLives < 1)
+        if(playerLives > 1)
         {
-            --_playerLives;
+            --playerLives;
+            lives[playerLives].gameObject.SetActive(false);
+            Debug.Log("Player now has " + playerLives + " lives");
         }
         else
         {
+            --playerLives;
+            lives[playerLives].gameObject.SetActive(false);
             Debug.Log("Game Over Condition Met");
+            mainAudio.Stop();
+            mainAudio.clip = null;
+            StartCoroutine(GameOver());
+        }
+    }
+
+    IEnumerator GameOver()
+    {
+        _fadeControl.StartFade(1);
+        yield return new WaitForSeconds(2f);
+        gameOver.gameObject.SetActive(true);
+        player.gameObject.SetActive(false);
+        timerResult.text += timer.text;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void IncrementKeys()
+    {
+        ++keys;
+        CheckKeys();
+        Debug.Log("Gained a key!");
+    }
+
+    public void CheckKeys()
+    {
+        if(keys == 3)
+        {
+            dome.gameObject.SetActive(false);
+            objectiveComplete.gameObject.SetActive(true);
         }
     }
 }

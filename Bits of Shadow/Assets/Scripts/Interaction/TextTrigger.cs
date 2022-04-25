@@ -16,17 +16,28 @@ public class TextTrigger : MonoBehaviour
 
     //This will never clear the text.
     public bool exitTrigger = false;
+    public bool keyClear = false;
+    public int keysToCollect = 3;
     public string textToDisplay;
+
+    int _keysAmount = 0;
 
     private void Awake()
     {
         _mainCanvas.GetComponent<CanvasGroup>().alpha = 0.0f;
         _mainCanvas.gameObject.SetActive(false);
         _promptText.text = textToDisplay;
+        _keysAmount = FindObjectOfType<GameplayManager>().keys;
     }
 
     private void OnTriggerStay(Collider other)
     {
+        _keysAmount = FindObjectOfType<GameplayManager>().keys;
+        if (keyClear && _keysAmount == keysToCollect)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
             _mainCanvas.gameObject.SetActive(true);
@@ -38,6 +49,12 @@ public class TextTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        _keysAmount = FindObjectOfType<GameplayManager>().keys;
+        if (keyClear && _keysAmount == keysToCollect)
+        {
+            return;
+        }
+
         if (exitTrigger)
             return;
 
