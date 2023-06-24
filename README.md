@@ -16,3 +16,8 @@ Unity project updated to quickly develop, test, and implement Unity game via Uni
 * Jenkins or Git CI/CD pipeline 
 * Atlassian Jira sprinting for overall project health
 * Juggling of multiple projects for more realistic development tasking experience
+
+## Links
+* Site where description can be fully parsed
+* WebGL link of project build
+* Jira and documentation page for classes and sprinting
