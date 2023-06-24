@@ -1,3 +1,5 @@
+![PCScreenGrab](https://github.com/ZachMoss31/Bits-of-Shadow/assets/88854718/ed28f9e9-bc44-41c2-b571-2b4c433f0886)
+
 # Bits-Of-Shadow
 Unity project updated to quickly develop, test, and implement Unity game via Unity Software Engineering development pipeline. Target is to update an old college project with multiple builds, shading, and CI/CD along with sprinting.
 
