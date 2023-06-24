@@ -22,4 +22,3 @@ Unity project updated to quickly develop, test, and implement Unity game via Uni
 ## Links
 * Site where description can be fully parsed
 * WebGL link of project build
-* Jira :: https://zmoss30.atlassian.net/jira/software/projects/BITS/boards/3
