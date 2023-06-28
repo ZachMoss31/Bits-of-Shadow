@@ -3,21 +3,26 @@
 # Bits-Of-Shadow
 Unity project updated to quickly develop, test, and implement Unity game via Unity Software Engineering development pipeline. Target is to update an old college project with multiple builds, shading, and CI/CD along with sprinting.
 
-## Desired Functionality
-* As a player, I want to launch a game from Web, Windows, and eventual console support (possibly mobile)
-* As a player, I want to launch my game from a single .exe
-* As a player, I want an engaging gaming experience with modern graphics quality
-* As a player, I want to see past runs of my level and compare (or compete) with friends
+## Summary
+Bits Of Shadow was originally the resultant product of my senior year undergraduate Game Development Certificate coursework. Now part of my professional portfolio, Bits has evolved from the culmination of Unity3D gameplay engineering in a course, into a full Software Engineering project in a professional development environment. The project has been planned in Atlassian Jira, source code was written in C# using Unity version 2022.3, version controlled in Git, and Python used for Jenkins automation in a CI/CD role. 
 
-* As a developer, I need CI/CD functionality for multiple builds and versions
-* As a developer, I want to learn HLSL for my projects art direction
+All development was planned in Atlassian Jira, and done by myself exclusively in an Agile environment reflecting a typical Software Engineering workflow.
 
-## Projected Tasking
-* Basics of Unity shading via HLSL for glowing, lighting, and electric effect
-* Updated control inputs and camera movement for a more engaging and customizable experience (eventual key mapping)
-* Jenkins or Git CI/CD pipeline 
-* Atlassian Jira sprinting for overall project health
-* Juggling of multiple projects for more realistic development tasking experience
+# Tools Used
+* Unity3D as engine, with .NET C# for scripting
+* Microsoft Visual Studio for developemnt and debugging
+* Git and GitHub Desktop for version control
+* HLSL for technical shading, as well as Shader Graph as needed
+* Jenkins for CI/CD pipeline
+* Python for scripting Jenkins
+* Atlassian products for issue tracking and sprint organizing
+
+# Development in Unity
+
+# Version Control and Git
+
+# CI/CD with Jenkins
+
 
 ## Links
 * Site where description can be fully parsed
